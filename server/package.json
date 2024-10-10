@@ -9,7 +9,8 @@
     "build": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node ./prisma/seed.ts",
-    "seed-two": "ts-node ./prisma/seed-two.ts"
+    "seed-two": "ts-node ./prisma/seed-two.ts",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
