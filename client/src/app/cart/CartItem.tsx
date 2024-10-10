@@ -55,7 +55,7 @@ function CartItem({book, quantity, id}: CartItemType) {
       />
       <div className='flex-grow flex flex-col'>
         <div className='flex justify-between items-start mb-2'>
-          <p className='text-[#BF00EA] text-lg sm:text-xl font-semibold'>
+          <p className='text-[#BF00EA] text-base sm:text-xl font-semibold max-w-14 text-ellipsis overflow-hidden whitespace-nowrap'>
             {book.title}
           </p>
           <p>${(book.price * quantity).toFixed(2)}</p>
@@ -74,7 +74,7 @@ function CartItem({book, quantity, id}: CartItemType) {
               <IoMdArrowDropdown />
             </div>
             {dropdown && (
-              <div className='absolute z-20 bg-[#F7EBF9] p-1 pl-2 text-sm min-w-20 rounded-md text-[#2F0139] top-9 left-0 flex flex-col gap-1'>
+              <div className='absolute z-20 bg-[#F7EBF9] py-3 pl-2 min-w-28 rounded-md text-[#2F0139] top-9 left-0 flex flex-col gap-2'>
                 {quantities.map((number, i, {length}) => (
                   <div
                     key={i}

@@ -2,7 +2,7 @@
 import {useState} from 'react';
 import {CiSearch} from 'react-icons/ci';
 import {IoCartOutline} from 'react-icons/io5';
-import {RiMenu3Fill} from 'react-icons/ri';
+// import {RiMenu3Fill} from 'react-icons/ri';
 import SearchForm from './SearchForm';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -37,7 +37,7 @@ function Header() {
           )}
           <IoCartOutline size={23} onClick={() => {}} />
         </Link>
-        <RiMenu3Fill size={23} />
+        {/* <RiMenu3Fill size={23} /> */}
       </div>
       <SearchForm open={searchModal} toggle={() => setSearchModal(false)} />
     </header>
