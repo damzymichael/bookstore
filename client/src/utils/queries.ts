@@ -2,7 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import instance from './axios.config';
 import {CartItemType} from '@/types';
 
-export function cartQuery(shouldFetch: boolean = true) {
+export function CartQuery(shouldFetch: boolean = true) {
   return useQuery({
     queryKey: ['cart-items'],
     queryFn: async () => {

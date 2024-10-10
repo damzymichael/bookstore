@@ -4,8 +4,22 @@ import {GrGallery} from 'react-icons/gr';
 import {MdHistoryEdu} from 'react-icons/md';
 import {FaRegFaceFlushed} from 'react-icons/fa6';
 import BookCategory from '@/components/BookCategory';
+import {bookstore} from '@/utils/axios.config';
+import {BookType} from '@/types';
+import Trending from './Trending';
 
-export default function Home() {
+const fetchBook = async (id: string) => {
+  const {data} = await bookstore.get<BookType>('/book/' + id);
+  return data;
+};
+
+export default async function Home() {
+  const ids = [
+    '6707f03812b3400398f1ee2e',
+    '6707f03412b3400398f1ee15',
+    '6707f03712b3400398f1ee25'
+  ];
+  const books = await Promise.all(ids.map(id => fetchBook(id)));
   return (
     <>
       <section className='min-h-[95vh] text-white relative'>
@@ -15,43 +29,7 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className='absolute w-1/2 top-1/2 left-1/2 -translate-x-1/2 translate-y-14 sm:-translate-y-1/2 mt-5'>
-          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30'>
-            <div className='bg-wine-cup relative flex flex-col justify-end bg-cover bg-center min-w-[260px] w-11/12  h-[400px] rounded-xl overflow-hidden p-2'>
-              <div className='absolute w-full h-full bg-brown-gradient -m-2' />
-              <h2 className='text-sm'>Water, Wine & Homecoming</h2>
-              <div className='flex items-center gap-1 z-10'>
-                <p className='text-[#FFFFFF80] text-xs'>Amaka Ojo</p>
-                <span className='text-[#FFFFFF66]'>&#x2022;</span>
-                <p className='text-[#FFFFFF80] text-xs'>$39.20</p>
-              </div>
-            </div>
-          </div>
-
-          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 -rotate-[5deg] sm:-rotate-[10deg] origin-top'>
-            <div className='bg-lady-1 relative flex flex-col justify-end bg-cover bg-center w-11/12 min-w-[260px] h-[400px] rounded-xl overflow-hidden p-2'>
-              <div className='absolute w-full h-full bg-brown-gradient -m-2' />
-              <h2 className='text-sm'>Water, Wine & Homecoming</h2>
-              <div className='flex items-center gap-1 z-10'>
-                <p className='text-[#FFFFFF80] text-xs'>Amaka Ojo</p>
-                <span className='text-[#FFFFFF66]'>&#x2022;</span>
-                <p className='text-[#FFFFFF80] text-xs'>$39.20</p>
-              </div>
-            </div>
-          </div>
-
-          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rotate-[5deg] sm:rotate-[10deg] origin-top'>
-            <div className='bg-lady-2 relative flex flex-col justify-end bg-cover bg-center w-11/12 min-w-[260px] h-[400px] rounded-xl overflow-hidden p-2'>
-              <div className='absolute w-full h-full bg-brown-gradient -m-2' />
-              <h2 className='text-sm'>Water, Wine & Homecoming</h2>
-              <div className='flex items-center gap-1 z-10'>
-                <p className='text-[#FFFFFF80] text-xs'>Amaka Ojo</p>
-                <span className='text-[#FFFFFF66]'>&#x2022;</span>
-                <p className='text-[#FFFFFF80] text-xs'>$39.20</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Trending books={books} />
       </section>
 
       {/* Featured categories  */}

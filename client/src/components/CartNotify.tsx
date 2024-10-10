@@ -2,7 +2,7 @@ import {FaCheckCircle} from 'react-icons/fa';
 import {IoMdCloseCircleOutline} from 'react-icons/io';
 import Modal from './ui/Modal';
 import Image from 'next/image';
-import {cartQuery} from '@/utils/queries';
+import {CartQuery} from '@/utils/queries';
 import {getTotalPrice} from '@/utils/book';
 import Button from './ui/Button';
 import {useRouter} from 'next/navigation';
@@ -12,7 +12,7 @@ type Props = Omit<React.ComponentProps<typeof Modal>, 'children'> & {
 };
 
 function CartNotify({open, toggle, imageUrl}: Props) {
-  const {data, isLoading, isRefetching} = cartQuery();
+  const {data, isLoading, isRefetching} = CartQuery();
   const router = useRouter();
   function navigateToCart() {
     toggle();

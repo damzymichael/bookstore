@@ -45,11 +45,19 @@ async function Page({params: {id}}: Props) {
           <div className='mb-2'>
             <p>Ratings</p>
             <div className='flex'>
-              {Array.from({length: book.rating}).map(_ => (
-                <FaStar size={20} fill='#B700E0' key={Math.random() * 200} />
+              {Array.from({length: book.rating}).map((_, i) => (
+                <FaStar
+                  size={20}
+                  fill='#B700E0'
+                  key={(Math.random() + i) * 200}
+                />
               ))}
-              {Array.from({length: 5 - book.rating}).map(_ => (
-                <FaRegStar fill='#B700E0' size={20} key={Math.random() * 200} />
+              {Array.from({length: 5 - book.rating}).map((_, i) => (
+                <FaRegStar
+                  fill='#B700E0'
+                  size={20}
+                  key={(Math.random() + i) * 200}
+                />
               ))}
             </div>
           </div>

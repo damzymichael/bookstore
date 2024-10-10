@@ -26,7 +26,7 @@ function SearchForm({open, toggle}: Props) {
   });
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!data || !e.target.value.trim()) return setResults([]);
-    timeout && clearTimeout(timeout);
+    if (timeout) clearTimeout(timeout);
     setSearchTimeout(
       setTimeout(() => {
         const searchResult = filterText(data, searchParam, e.target.value);

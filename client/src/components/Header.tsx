@@ -6,16 +6,23 @@ import {RiMenu3Fill} from 'react-icons/ri';
 import SearchForm from './SearchForm';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {cartQuery} from '@/utils/queries';
+import {CartQuery} from '@/utils/queries';
+import Image from 'next/image';
 
 function Header() {
   const [searchModal, setSearchModal] = useState(false);
   const pathname = usePathname();
-  const {data} = cartQuery(pathname === '/cart');
+  const {data} = CartQuery(pathname === '/cart');
   return (
     <header className='fixed border-b border-[#FFFFFF40] bg-[#0b1014] z-10 w-full flex justify-between items-center gap-5 lg:gap-7 py-3 px-5 sm:px-10 text-white'>
       <Link href='/'>
-        <img src='/book.svg' alt='logo' className='w-6 aspect-auto' />
+        <Image
+          src='/book.svg'
+          width={30}
+          height={40}
+          alt='logo'
+          className='w-6 aspect-auto'
+        />
       </Link>
       <div className='flex items-center gap-5'>
         <button onClick={() => setSearchModal(true)}>

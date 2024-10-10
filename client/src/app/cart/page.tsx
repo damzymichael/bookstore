@@ -4,11 +4,11 @@ import {FaStar} from 'react-icons/fa';
 import really_good from '@/assets/really-good.jpeg';
 import Image from 'next/image';
 import CartItem from './CartItem';
-import {cartQuery} from '@/utils/queries';
+import {CartQuery} from '@/utils/queries';
 import {getTotalPrice} from '@/utils/book';
 
 function Page() {
-  const {data, isLoading} = cartQuery();
+  const {data, isLoading} = CartQuery();
   return (
     <section className='pt-20'>
       <div className='flex flex-col md:flex-row gap-10 md:gap-0 items-start font-medium mb-10'>
@@ -55,8 +55,8 @@ function Page() {
               </p>
               <p className='text-[#FFFFFFB5] mb-1 text-xs'>By John Doe</p>
               <div className='flex mb-3'>
-                {Array.from({length: 5}).map(_ => (
-                  <FaStar size={18} fill='#0068E0' key={Math.random() * 100} />
+                {Array.from({length: 5}).map((_, index) => (
+                  <FaStar size={18} fill='#0068E0' key={index} />
                 ))}
               </div>
               <p className='text-white mb-4 text-sm'>$0.00</p>

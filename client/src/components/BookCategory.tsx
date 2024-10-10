@@ -6,6 +6,7 @@ import Book from './Book';
 import {bookstore} from '@/utils/axios.config';
 import {useQuery} from '@tanstack/react-query';
 import {BookType} from '@/types';
+import {AnimatePresence, motion} from 'framer-motion';
 
 type Props = {
   title: string;
@@ -41,17 +42,25 @@ function BookCategory({title, query, category}: Props) {
               key={i}
             />
           ))}
-        {data &&
-          data.slice(0, 6).map((book, _, {length}) => {
-            const randomIndex = Math.floor(Math.random() * length);
-            return (
-              <Book
-                {...book}
-                color={colors[randomIndex]}
-                key={Math.floor(Math.random() * 1000)}
-              />
-            );
-          })}
+        <AnimatePresence>
+          {data &&
+            data.map((book, _, {length}) => {
+              const randomIndex = Math.floor(Math.random() * length);
+              return (
+                <motion.div
+                  initial={{opacity: 0, y: 20}}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: {duration: 1.3, type: 'spring'}
+                  }}
+                  key={Math.floor(Math.random() * 1000)}
+                >
+                  <Book {...book} color={colors[randomIndex]} />
+                </motion.div>
+              );
+            })}
+        </AnimatePresence>
       </div>
     </section>
   );

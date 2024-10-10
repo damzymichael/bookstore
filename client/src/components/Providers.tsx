@@ -3,6 +3,7 @@ import React from 'react';
 import {toast} from 'sonner';
 import {MutationCache} from '@tanstack/react-query';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {AxiosError, AxiosResponse} from 'axios';
 
 const Providers = ({children}: {children: React.ReactNode}) => {
   const [queryClient] = React.useState(() => {
@@ -13,11 +14,13 @@ const Providers = ({children}: {children: React.ReactNode}) => {
         }
       },
       mutationCache: new MutationCache({
-        onSuccess: (response: any) => {
-          toast.success(response.data.message);
+        onSuccess: response => {
+          const res = response as AxiosResponse<{message: string}>;
+          toast.success(res.data.message);
         },
-        onError: (error: any) => {
-          toast.error(error.response.data.message);
+        onError: error => {
+          const err = error as AxiosError<{message: string}>;
+          toast.error(err.response?.data.message);
         }
       })
     });
