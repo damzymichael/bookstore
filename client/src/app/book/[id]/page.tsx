@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import AddToCartButton from './AddToCartButton';
-import {bookstore} from '@/utils/axios.config';
 import {BookType} from '@/types';
 import BookCategory from '@/components/BookCategory';
+import axios from 'axios';
 
 interface Props {
   params: {
@@ -12,8 +12,10 @@ interface Props {
   };
 }
 
+const base_url = 'https://bookstore-api-kappa.vercel.app';
+
 async function Page({params: {id}}: Props) {
-  const {data: book} = await bookstore.get<BookType>('book/' + id);
+  const {data: book} = await axios.get<BookType>(base_url + '/book/' + id);
   return (
     <section className='pt-20'>
       <Image
