@@ -51,11 +51,11 @@ function CartItem({book, quantity, id}: CartItemType) {
         width={100}
         height={250}
         alt='Book Image'
-        className='w-1/4'
+        className='w-[30%]'
       />
       <div className='flex-grow flex flex-col'>
-        <div className='flex justify-between items-start mb-2'>
-          <p className='text-[#BF00EA] text-base sm:text-xl font-semibold max-w-14 text-ellipsis overflow-hidden whitespace-nowrap'>
+        <div className='flex gap-2 justify-between items-start mb-2'>
+          <p className='text-[#BF00EA] text-base sm:text-xl max-h-16 mb-3 overflow-y-hidden text-ellipsis font-semibold'>
             {book.title}
           </p>
           <p>${(book.price * quantity).toFixed(2)}</p>
