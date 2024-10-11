@@ -51,7 +51,7 @@ function CartNotify({open, toggle, imageUrl}: Props) {
           </h3>
         )}
         {data && data.length > 0 && user && (
-          <PayButton user={user} cart={data}>
+          <PayButton user={user} cart={data} callback={toggle}>
             Proceed to Checkout
           </PayButton>
         )}

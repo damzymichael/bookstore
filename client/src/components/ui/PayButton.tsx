@@ -9,9 +9,10 @@ import {useRouter} from 'next/navigation';
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   user: User;
   cart: CartItemType[];
+  callback?: () => void;
 };
 
-function PayButton({children, className, user, cart}: Props) {
+function PayButton({children, className, user, cart, callback}: Props) {
   const router = useRouter();
   const initializePayment = usePaystackPayment({
     email: user.email,
@@ -26,14 +27,15 @@ function PayButton({children, className, user, cart}: Props) {
         'bg-[#B700E0] w-full text-sm py-2 px-3 rounded-lg',
         className
       )}
-      onClick={() =>
+      onClick={() => {
+        if (callback) callback();
         initializePayment({
           onSuccess: () => {
             toast.success('Payment successful');
             router.push('/');
           }
-        })
-      }
+        });
+      }}
     >
       {children}
     </button>
