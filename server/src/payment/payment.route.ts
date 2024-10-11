@@ -3,6 +3,6 @@ import paymentController from './payment.controller';
 
 const router = Router();
 
-router.get('/webhook', paymentController.processPayment);
+router.post('/webhook', paymentController.processPayment);
 
 export default router;
