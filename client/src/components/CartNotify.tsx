@@ -4,7 +4,8 @@ import Modal from './ui/Modal';
 import Image from 'next/image';
 import {CartQuery, UserQuery} from '@/utils/queries';
 import {getTotalPrice} from '@/utils/book';
-import Button, {PayButton} from './ui/Button';
+import Button from './ui/Button';
+import PayButton from './ui/PayButton';
 import {useRouter} from 'next/navigation';
 
 type Props = Omit<React.ComponentProps<typeof Modal>, 'children'> & {
