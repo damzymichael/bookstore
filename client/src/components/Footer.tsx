@@ -15,10 +15,10 @@ function Footer() {
     'Business'
   ];
   return (
-    <footer className='min-h-[30vh] flex justify-between bg-footer-gradient px-5 sm:px-10 py-10'>
+    <footer className='min-h-[30vh] flex flex-col sm:flex-row gap-4 justify-between bg-footer-gradient px-5 sm:px-10 py-10'>
       <div>
         <h5 className='text-lg mb-3'>LOGO</h5>
-        <div className='flex items-center gap-3 mb-5'>
+        <div className='flex  items-center gap-3 mb-5'>
           <FaXTwitter />
           <AiFillInstagram />
           <FaLinkedinIn />
@@ -31,7 +31,7 @@ function Footer() {
           Terms and conditions
         </a>
       </div>
-      <div className='grid justify-end text-center grid-cols-3 w-3/4'>
+      <div className='grid justify-end text-left sm:text-center grid-cols-3 w-full sm:w-3/4'>
         {categories.map((category, i) => (
           <a href='#' className='block font-light text-sm' key={i}>
             {category}

@@ -13,7 +13,8 @@ type BookQuery = {
 };
 
 //Switch books postion and return 6 books
-function swapBooks<T>(books: T[]) {
+function swapBooks<T>(books: T[], take: string) {
+  if (take === 'all') return books;
   for (let i = books.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [books[i], books[j]] = [books[j], books[i]];
@@ -23,7 +24,7 @@ function swapBooks<T>(books: T[]) {
 
 export default Controller({
   async getBooksByCategory(req: Request<{}, {}, {}, BookQuery>, res) {
-    const {group, category} = req.query;
+    const {group, category, take} = req.query;
     let books: Omit<Book, 'createdAt' | 'updatedAt'>[];
     switch (group) {
       case 'bestselling':
@@ -31,21 +32,21 @@ export default Controller({
           where: {bestSelling: true},
           ...OMIT_OPTIONS
         });
-        books = swapBooks<(typeof books)[number]>(books);
+        books = swapBooks<(typeof books)[number]>(books, take);
         break;
       case 'featured':
         books = await prisma.book.findMany({
           where: {bestSelling: false},
           ...OMIT_OPTIONS
         });
-        books = swapBooks<(typeof books)[number]>(books);
+        books = swapBooks<(typeof books)[number]>(books, take);
         break;
       default:
         books = await prisma.book.findMany({
           ...OMIT_OPTIONS,
           where: {category}
         });
-        books = swapBooks(books);
+        books = swapBooks(books, take);
     }
     return res.status(200).json(books);
   },

@@ -7,14 +7,16 @@ import {bookstore} from '@/utils/axios.config';
 import {useQuery} from '@tanstack/react-query';
 import {BookType} from '@/types';
 import {AnimatePresence, motion} from 'framer-motion';
+import Link from 'next/link';
 
 type Props = {
   title: string;
   query?: 'bestselling' | 'featured';
   category?: 'art' | 'romance' | 'thriller' | 'health';
+  link?: string;
 };
 
-function BookCategory({title, query, category}: Props) {
+function BookCategory({title, query, category, link}: Props) {
   const url = `book/category?group=${query}&category=${category}`;
   const {isLoading, data} = useQuery({
     queryKey: [`books-${query ?? category}`],
@@ -27,12 +29,12 @@ function BookCategory({title, query, category}: Props) {
     <section className='my-7'>
       <header className='py-2 border-y flex items-center justify-between px-2'>
         <h2>{title}</h2>
-        <a href='#' className='flex items-center gap-2'>
+        <Link href={link ?? '#'} className='flex items-center gap-2'>
           <span>See all</span>
           <div className='bg-white p-1 rounded-full'>
             <IoIosArrowRoundForward color='black' size={14} />
           </div>
-        </a>
+        </Link>
       </header>
       <div className='grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-6 my-5'>
         {isLoading &&
@@ -44,8 +46,8 @@ function BookCategory({title, query, category}: Props) {
           ))}
         <AnimatePresence>
           {data &&
-            data.map((book, _, {length}) => {
-              const randomIndex = Math.floor(Math.random() * length);
+            data.map(book => {
+              const randomIndex = Math.floor(Math.random() * colors.length);
               return (
                 <motion.div
                   initial={{opacity: 0, y: 20}}

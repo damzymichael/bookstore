@@ -40,3 +40,4 @@ export type Book = {
   category: string;
 };
 
+export type User = {email: string; id: string; phoneNumber: string};

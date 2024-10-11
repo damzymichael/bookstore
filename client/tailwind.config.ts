@@ -12,9 +12,6 @@ const config: Config = {
     },
     extend: {
       backgroundImage: {
-        'wine-cup': "url('/wine-cup.jpeg')",
-        'lady-1': "url('/lady-1.jpeg')",
-        'lady-2': "url('/lady-2.png')",
         'brown-gradient':
           'linear-gradient(180deg, rgba(0, 0, 0, 0.159) 40.38%, rgba(9, 4, 3, 0.5247) 64.32%)',
         'footer-gradient':

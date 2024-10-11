@@ -1,5 +1,4 @@
 import {CiMedicalCross} from 'react-icons/ci';
-import {IoIosArrowRoundForward} from 'react-icons/io';
 import {GrGallery} from 'react-icons/gr';
 import {MdHistoryEdu} from 'react-icons/md';
 import {FaRegFaceFlushed} from 'react-icons/fa6';
@@ -7,9 +6,10 @@ import BookCategory from '@/components/BookCategory';
 import {bookstore} from '@/utils/axios.config';
 import {BookType} from '@/types';
 import Trending from './Trending';
+import Link from 'next/link';
 
 const fetchBook = async (id: string) => {
-  const {data} = await bookstore.get<BookType>('/book/' + id);
+  const {data} = await bookstore.get<BookType>('book/' + id);
   return data;
 };
 
@@ -34,40 +34,46 @@ export default async function Home() {
 
       {/* Featured categories  */}
       <section className='my-7'>
-        <header className='py-2 border-y flex items-center justify-between px-2'>
+        <header className='py-2 border-y px-2'>
           <h2>Featured categories</h2>
-          <a href='#' className='flex items-center gap-2'>
-            <span>See all</span>
-            <div className='bg-white p-1 rounded-full'>
-              <IoIosArrowRoundForward color='black' size={14} />
-            </div>
-          </a>
         </header>
         <div className='grid gap-2 grid-cols-2 sm:grid-cols-4 my-5'>
-          <div className='bg-[#895C8245] text-[#B700E0] rounded-lg p-3'>
+          <Link
+            href='/category/art'
+            className='bg-[#895C8245] text-[#B700E0] rounded-lg p-3'
+          >
             <GrGallery size={24} />
             <p className='mt-10'>
               Arts and <br /> Photography
             </p>
-          </div>
-          <div className='bg-[#90935E40] text-[#D8E704] rounded-lg p-3'>
+          </Link>
+          <Link
+            href='/category/romance'
+            className='bg-[#90935E40] text-[#D8E704] rounded-lg p-3'
+          >
             <MdHistoryEdu size={24} />
             <p className='mt-10'>
               Historical <br /> Romance
             </p>
-          </div>
-          <div className='bg-[#5D4A358A] text-[#EF7D00] rounded-lg p-3'>
+          </Link>
+          <Link
+            href='/category/thriller'
+            className='bg-[#5D4A358A] text-[#EF7D00] rounded-lg p-3'
+          >
             <FaRegFaceFlushed size={24} />
             <p className='mt-10'>
               Thriller & <br /> Suspense
             </p>
-          </div>
-          <div className='bg-[#526C6E59] text-[#24D7E3] rounded-lg p-3'>
+          </Link>
+          <Link
+            href='/category/health'
+            className='bg-[#526C6E59] text-[#24D7E3] rounded-lg p-3'
+          >
             <CiMedicalCross size={24} />
             <p className='mt-10'>
               Health & <br /> Wellness
             </p>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -83,13 +89,13 @@ export default async function Home() {
           <br /> Latest News!
         </p>
         <form>
-          <div className='border border-[#FFFFFF40] pl-2 w-max mx-auto rounded-full'>
+          <div className='border border-[#FFFFFF40] pl-2 min-w-72 mx-auto rounded-full'>
             <input
               type='text'
-              className='bg-inherit outline-none p-2'
+              className='bg-inherit outline-none px-2 py-4'
               placeholder='Email address'
             />
-            <button className='bg-white text-black py-2 px-3 rounded-full'>
+            <button className='bg-white text-black py-4 px-3 rounded-full'>
               Subscribe
             </button>
           </div>

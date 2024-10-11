@@ -77,10 +77,10 @@ function SearchForm({open, toggle}: Props) {
               <IoMdArrowDropdown />
             </div>
             {dropdown && (
-              <div className='absolute z-30 bg-[#B700E0] p-1 pl-2 text-sm min-w-20 rounded-md text-white top-8 left-1 flex flex-col gap-2'>
+              <div className='absolute z-30 bg-[#B700E0] p-1 pl-2 min-w-20 rounded-md text-white top-8 left-1 flex flex-col gap-2'>
                 {searchParams.map(param => (
                   <button
-                    className='text-left'
+                    className='text-left py-1'
                     key={Math.random() * 200}
                     onClick={() => setSearchParam(param)}
                   >
@@ -96,7 +96,7 @@ function SearchForm({open, toggle}: Props) {
             <input
               ref={inputRef}
               type='text'
-              className='bg-inherit outline-none px-3 py-1 border min-w-72 border-[#2F0139] rounded-xl placeholder:text-sm'
+              className='bg-inherit outline-none px-3 py-2 border min-w-72 border-[#2F0139] rounded-xl'
               placeholder={`Enter ${searchParam.toLowerCase()} name`}
               disabled={isLoading}
               onChange={handleInputChange}
@@ -106,7 +106,7 @@ function SearchForm({open, toggle}: Props) {
                 {results.map(book => (
                   <div
                     role='button'
-                    className='text-left'
+                    className='text-left py-1'
                     key={book.id}
                     onClick={() => {
                       closeModal();

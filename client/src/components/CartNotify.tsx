@@ -2,9 +2,9 @@ import {FaCheckCircle} from 'react-icons/fa';
 import {IoMdCloseCircleOutline} from 'react-icons/io';
 import Modal from './ui/Modal';
 import Image from 'next/image';
-import {CartQuery} from '@/utils/queries';
+import {CartQuery, UserQuery} from '@/utils/queries';
 import {getTotalPrice} from '@/utils/book';
-import Button from './ui/Button';
+import Button, {PayButton} from './ui/Button';
 import {useRouter} from 'next/navigation';
 
 type Props = Omit<React.ComponentProps<typeof Modal>, 'children'> & {
@@ -13,6 +13,7 @@ type Props = Omit<React.ComponentProps<typeof Modal>, 'children'> & {
 
 function CartNotify({open, toggle, imageUrl}: Props) {
   const {data, isLoading, isRefetching} = CartQuery();
+  const {data: user} = UserQuery();
   const router = useRouter();
   function navigateToCart() {
     toggle();
@@ -48,12 +49,14 @@ function CartNotify({open, toggle, imageUrl}: Props) {
             Cart Subtotal: ${getTotalPrice(data).toFixed(2)}
           </h3>
         )}
-        <button className='bg-[#B700E0] w-full text-sm py-1 rounded-lg mb-4'>
-          Proceed to Checkout
-        </button>
+        {data && data.length > 0 && user && (
+          <PayButton user={user} cart={data}>
+            Proceed to Checkout
+          </PayButton>
+        )}
         <Button
           onClick={navigateToCart}
-          className='border-[#B700E0] bg-inherit border text-[#B700E0] w-full text-sm py-1 px-3 rounded-lg mb-4'
+          className='border-[#B700E0] bg-inherit border text-[#B700E0] w-full text-sm py-1 px-3 rounded-lg mt-2 mb-4'
         >
           Go to cart
         </Button>

@@ -81,6 +81,7 @@ async function Page({params: {id}}: Props) {
         category={
           book.category as 'art' | 'romance' | 'thriller' | 'health' | undefined
         }
+        link={'/category/' + book.category}
       />
     </section>
   );
