@@ -3,7 +3,6 @@ import prisma from '../utils/prisma';
 
 export default Controller({
   async processPayment(req, res) {
-    console.log(req.body.data.metadata);
     await prisma.cart.update({
       where: {id: req.body.data.metadata.cartId},
       data: {purchased: true}
